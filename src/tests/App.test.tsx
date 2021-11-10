@@ -1,9 +1,12 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from '../App';
+import React from "react";
+import { Header } from "../components";
+import { render, screen } from "@testing-library/react";
+import App from "../App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App component", () => {
+  it("should render Header with title", () => {
+    render(<App />);
+    const titleName = screen.getByRole("heading");
+    expect(titleName).toBeInTheDocument();
+  });
 });
