@@ -1,10 +1,11 @@
 import React from "react";
 import { render, cleanup, fireEvent, screen } from "@testing-library/react";
 import { Search } from "..";
+import App from "../../App";
 
 describe("Search component", () => {
   beforeEach(() => {
-    render(<Search />);
+    render(<App />);
   });
 
   it("should allow input event on search input", () => {
