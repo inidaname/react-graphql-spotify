@@ -4,17 +4,23 @@ import { render, screen } from "@testing-library/react";
 import App from "../App";
 
 describe("App component", () => {
-  it("should render Header with title", () => {
+  beforeEach(() => {
     render(<App />);
+  });
+
+  it("should render Header with title", () => {
     const titleName = screen.getByRole("heading");
     expect(titleName).toBeInTheDocument();
   });
 
-  it('should render Search component', () => {
-		const { getByText, getByRole } = render(<App />);
+  it("should render Search component", () => {
+    const title = screen.getByText("Search Here");
 
-		const title = getByText('Search');
+    expect(title).toBeInTheDocument();
+  });
 
-		expect(title).toBeInTheDocument();
+  it("should render Result component", () => {
+    const results = screen.getByText("Search Result");
+    expect(results).toBeInTheDocument();
   });
 });
