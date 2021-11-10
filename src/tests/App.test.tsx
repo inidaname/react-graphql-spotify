@@ -9,4 +9,12 @@ describe("App component", () => {
     const titleName = screen.getByRole("heading");
     expect(titleName).toBeInTheDocument();
   });
+
+  it('should render Search component', () => {
+		const { getByText, getByRole } = render(<App />);
+
+		const title = getByText('Search');
+
+		expect(title).toBeInTheDocument();
+  });
 });
