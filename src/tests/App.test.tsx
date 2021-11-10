@@ -13,10 +13,11 @@ describe("App component", () => {
     expect(titleName).toBeInTheDocument();
   });
 
-  it("should render Search component", () => {
+  it("should render Search component with search Input", () => {
     const title = screen.getByText("Search Here");
-
+    const input = screen.getByRole('searchbox', { name: 'Search by artist name' });
     expect(title).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
   });
 
   it("should render Result component", () => {
