@@ -1,11 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Header, Search } from './components';
+import { Footer, Header, Result, Search } from './components';
 
 const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <Header />
       <Search />
+      <Result />
+      <Footer />
     </>
   );
 }

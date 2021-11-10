@@ -6,7 +6,7 @@ interface Props {}
 const Header: FunctionComponent<Props> = (): ReactElement => {
   return (
     <header className={styles.header}>
-      <span>Music Search</span>
+      <h1>Music Search</h1>
     </header>
   );
 };
