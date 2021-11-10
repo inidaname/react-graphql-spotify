@@ -23,4 +23,9 @@ describe("App component", () => {
     const results = screen.getByText("Search Result");
     expect(results).toBeInTheDocument();
   });
+
+  it("should render the footer component", () => {
+    const footer = screen.getByRole("contentinfo");
+    expect(footer).toBeInTheDocument();
+  });
 });
