@@ -1,10 +1,11 @@
-import React from 'react';
-import { Header } from './components';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { Header, Search } from './components';
 
-function App() {
+const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <Header />
+      <Search />
     </>
   );
 }

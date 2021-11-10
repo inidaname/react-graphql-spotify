@@ -5,9 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  align-items: stretch;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
 }
