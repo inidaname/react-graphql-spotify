@@ -1,32 +1,40 @@
 import React from "react";
 import { Header } from "../components";
-import { render, screen } from "@testing-library/react";
+import { act, render, RenderResult, screen } from "@testing-library/react";
 import App from "../App";
+import { MockedProvider } from "@apollo/client/testing";
+import mocks from "./mock/result";
+
 
 describe("App component", () => {
-  beforeEach(() => {
-    render(<App />);
+  let rendered: RenderResult
+  beforeEach( async() => {
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={mocks} addTypename={false}>
+            <App />
+        </MockedProvider>
+      )
+    })
   });
 
   it("should render Header with title", () => {
-    const titleName = screen.getByRole("heading");
+    const titleName = rendered.getByRole("heading");
     expect(titleName).toBeInTheDocument();
   });
 
   it("should render Search component with search Input", () => {
-    const title = screen.getByText("Search Here");
-    const input = screen.getByRole('searchbox', { name: 'Search by artist name' });
-    expect(title).toBeInTheDocument();
+    const input = rendered.getByRole('searchbox', { name: 'Search by artist name' });
     expect(input).toBeInTheDocument();
   });
 
   it("should render Result component", () => {
-    const results = screen.getByText("Search Result");
+    const results = rendered.getByText("Search Result");
     expect(results).toBeInTheDocument();
   });
 
   it("should render the footer component", () => {
-    const footer = screen.getByRole("contentinfo");
+    const footer = rendered.getByRole("contentinfo");
     expect(footer).toBeInTheDocument();
   });
 });
