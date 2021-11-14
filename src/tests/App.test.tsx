@@ -1,6 +1,5 @@
 import React from "react";
-import { Header } from "../components";
-import { act, render, RenderResult, screen } from "@testing-library/react";
+import { act, render, RenderResult } from "@testing-library/react";
 import App from "../App";
 import { MockedProvider } from "@apollo/client/testing";
 import mocks from "./mock/result";
@@ -26,6 +25,11 @@ describe("App component", () => {
   it("should render Search component with search Input", () => {
     const input = rendered.getByRole('searchbox', { name: 'Search by artist name' });
     expect(input).toBeInTheDocument();
+  });
+
+  it('should render button component', () => {
+    const button = rendered.getByRole('button', { name: 'Search'});
+    expect(button).toBeInTheDocument();
   });
 
   it("should render Result component", () => {
