@@ -9,6 +9,7 @@ body {
   flex-direction: column;
   justify-self: flex-start;
   align-items: stretch;
+  min-height: 100vh;
 }
 * {
   margin: 0;
