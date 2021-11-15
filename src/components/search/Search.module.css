@@ -1,3 +1,41 @@
 .searchSpace {
-  height: 23px;
+  margin-top: 2px;
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchSpace label {
+  color: #454864;
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.searchSpace input {
+  margin-right: 21px;
+  margin-left: 21px;
+  border-radius: 0.4rem;
+  border: none;
+  position: relative;
+  transition: box-shadow 300ms;
+  display: block;
+  line-height: 0.8rem;
+  color: #455A64;
+  font-size: 16px;
+  height: 38px;
+  width: 45%;
+  box-shadow: 0.01rem 0.2rem 0.4rem #0094e97e;
+  padding: 0.8rem 1.6rem;
+}
+
+.searchSpace input::placeholder {
+  color: #B0BEC5;
+}
+
+.searchSpace input:focus {
+  outline: none;
+  box-shadow: 0.1rem 0.6rem 1.0rem #0093e9;
 }

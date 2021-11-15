@@ -13,7 +13,7 @@ describe("Search component", () => {
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Search values={value} handleChange={mockCallBack} />
+          <Search handleClick={mockCallBack} values={value} handleChange={mockCallBack} />
         </MockedProvider>
       );
     });
