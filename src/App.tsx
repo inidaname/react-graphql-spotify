@@ -5,8 +5,7 @@ import React, {
   useState,
 } from "react";
 import { Button, Footer, Header, Result, Search } from "./components";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { QUERY_ARTISTS } from "./graphql";
+import { useArtistLazyQuery } from "./generated/graphql";
 
 const App: FunctionComponent = (): ReactElement => {
   // set values for search input
@@ -15,25 +14,15 @@ const App: FunctionComponent = (): ReactElement => {
 
   // const [getArtists, { data, error }] = useLazyQuery(QUERY_ARTISTS);
 
-  const { loading, error, data } = useQuery(QUERY_ARTISTS, {
-    variables: { byName: poplate },
-  });
+  const [getArtists, {data, loading, error}] = useArtistLazyQuery();
 
-  // const updateQuery = () => {
-  // 	getArtists({ variables: { byName: values } });
-  // };
-
-  function getSearch() {
-    setPoplate(values);
-  }
-
-  useEffect(() => {
-
-    console.log(data)
-    console.log(loading)
-    // console.log(error);
-    return () => {};
-  }, [data]);
+  const updateQuery = () => {
+    getArtists({ variables: { byName: values } });
+  };
+  
+  // function getSearch() {
+    //   setPoplate(values);
+    // }
 
   // add graphql query
   // if (loading) return <>"Loading..."</>;
@@ -43,7 +32,7 @@ const App: FunctionComponent = (): ReactElement => {
     <>
       <Header />
       <Search values={values} handleChange={setValues} />
-      <Button status={loading} handleClick={getSearch} />
+      <Button status={loading} handleClick={updateQuery} />
       {data && <Result data={data} />}
       <Footer />
     </>

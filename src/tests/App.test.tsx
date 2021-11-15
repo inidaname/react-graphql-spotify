@@ -8,7 +8,6 @@ import { Result } from "../components";
 
 describe("App component", () => {
   let rendered: RenderResult;
-  let button: HTMLButtonElement;
 
   beforeEach(async () => {
     await act(async () => {
@@ -18,17 +17,6 @@ describe("App component", () => {
         </MockedProvider>
       );
     });
-
-    const input: HTMLInputElement = rendered.getByRole("searchbox", {
-      name: "Search by artist name",
-    }) as HTMLInputElement;
-
-    fireEvent.change(input, { target: { value: "Eminem" } });
-
-    button = rendered.getByRole("button", {
-      name: "Search",
-    }) as HTMLButtonElement;
-    fireEvent.click(button);
 
     jest.mock("@apollo/react-hooks", () => {
       const data = { mocks }; // put your mock data here
@@ -65,13 +53,12 @@ describe("App component", () => {
   }
 
   it("should render Result component", async () => {
-    expect(button.disabled).toBeTruthy();
     expect(rendered.queryByText("Search Result")).toBe(null);
 
     await wait();
 
+
     await waitForExpect(async () => {
-      expect(button.disabled).toBeFalsy();
 
       await wait();
 

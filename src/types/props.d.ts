@@ -1,17 +1,12 @@
+import { Album, ArtistQuery } from "../generated/graphql";
+
 export interface SearchProps {
   values: string;
   handleChange: (value: string) => void;
 }
 
 export interface ResultProps {
-  data: {
-    queryArtists: {
-      albums: {}[];
-      id: string;
-      image: string;
-      name: string;
-    }[]
-  }
+  data: ArtistQuery
 }
 
 export interface ButtonProps {
