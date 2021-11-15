@@ -1,20 +1,42 @@
 import React from "react";
-import { act, render, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import App from "../App";
 import { MockedProvider } from "@apollo/client/testing";
 import mocks from "./mock/result";
-
+import waitForExpect from "wait-for-expect";
+import { Result } from "../components";
 
 describe("App component", () => {
-  let rendered: RenderResult
-  beforeEach( async() => {
+  let rendered: RenderResult;
+  let button: HTMLButtonElement;
+
+  beforeEach(async () => {
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
-            <App />
+          <App />
         </MockedProvider>
-      )
-    })
+      );
+    });
+
+    const input: HTMLInputElement = rendered.getByRole("searchbox", {
+      name: "Search by artist name",
+    }) as HTMLInputElement;
+
+    fireEvent.change(input, { target: { value: "Eminem" } });
+
+    button = rendered.getByRole("button", {
+      name: "Search",
+    }) as HTMLButtonElement;
+    fireEvent.click(button);
+
+    jest.mock("@apollo/react-hooks", () => {
+      const data = { mocks }; // put your mock data here
+      return {
+        __esModule: true,
+        useQuery: jest.fn(() => ({ data })),
+      };
+    });
   });
 
   it("should render Header with title", () => {
@@ -23,18 +45,44 @@ describe("App component", () => {
   });
 
   it("should render Search component with search Input", () => {
-    const input = rendered.getByRole('searchbox', { name: 'Search by artist name' });
+    const input = rendered.getByRole("searchbox", {
+      name: "Search by artist name",
+    });
     expect(input).toBeInTheDocument();
   });
 
-  it('should render button component', () => {
-    const button = rendered.getByRole('button', { name: 'Search'});
+  it("should render button component", () => {
+    const button = rendered.getByRole("button", { name: "Search" });
     expect(button).toBeInTheDocument();
   });
 
-  it("should render Result component", () => {
-    const results = rendered.getByText("Search Result");
-    expect(results).toBeInTheDocument();
+  async function wait(ms = 0) {
+    await act(() => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    });
+  }
+
+  it("should render Result component", async () => {
+    expect(button.disabled).toBeTruthy();
+    expect(rendered.queryByText("Search Result")).toBe(null);
+
+    await wait();
+
+    await waitForExpect(async () => {
+      expect(button.disabled).toBeFalsy();
+
+      await wait();
+
+      rendered.rerender(
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Result data={mocks[0].data} />
+        </MockedProvider>
+      );
+
+      expect(rendered.getByText("Search Result")).toBeInTheDocument();
+    });
   });
 
   it("should render the footer component", () => {

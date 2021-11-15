@@ -4,10 +4,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Footer, Header, Result, Search } from "./components";
+import { Button, Footer, Header, Result, Search } from "./components";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { QUERY_ARTISTS } from "./graphql";
-import axios from "axios";
 
 const App: FunctionComponent = (): ReactElement => {
   // set values for search input
@@ -30,8 +29,8 @@ const App: FunctionComponent = (): ReactElement => {
 
   useEffect(() => {
 
-    console.log(data);
-
+    console.log(data)
+    console.log(loading)
     // console.log(error);
     return () => {};
   }, [data]);
@@ -44,9 +43,8 @@ const App: FunctionComponent = (): ReactElement => {
     <>
       <Header />
       <Search values={values} handleChange={setValues} />
-      <button onClick={() => getSearch()}>Search</button>
-      <Result />
-      {loading && `Add loading`}
+      <Button status={loading} handleClick={getSearch} />
+      {data && <Result data={data} />}
       <Footer />
     </>
   );
