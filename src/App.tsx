@@ -7,6 +7,7 @@ import React, {
 import { Button, Footer, Header, Result, Search } from "./components";
 import { useArtistLazyQuery } from "./generated/graphql";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { container } from "./styles/App.module.css";
 
 const App: FunctionComponent = (): ReactElement => {
   // set values for search input
@@ -42,9 +43,11 @@ const App: FunctionComponent = (): ReactElement => {
           />
         </Helmet>
         <Header />
-        <Search values={values} handleChange={setValues} />
-        <Button status={loading} handleClick={updateQuery} />
-        {data && <Result data={data} />}
+        <main className={container}>
+          <Search values={values} handleChange={setValues} />
+          <Button status={loading} handleClick={updateQuery} />
+          {data && <Result data={data} />}
+        </main>
         <Footer />
       </HelmetProvider>
     </>
