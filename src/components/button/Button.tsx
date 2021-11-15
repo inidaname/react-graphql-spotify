@@ -4,6 +4,7 @@ import styles from './Button.module.css';
 
 
 const Button: FunctionComponent<ButtonProps> = ({status, handleClick}) => {
+  console.log(status)
   return  <button className={styles.button} disabled={status} name="search" onClick={handleClick}>Search</button>;
 };
 

@@ -17,12 +17,14 @@ describe('Button component', () => {
     })
   });
 
-  it("should click to search value", () => {
+  it("should click to search value", async () => {
     const button: HTMLButtonElement = rendered.getByRole("button", {
       name: "Search",
     }) as HTMLButtonElement;
 
-    userEvent.click(button)
+    await act(async () => {
+      userEvent.click(button)
+    })
     expect(button.disabled).toBeTruthy()
   });
 
