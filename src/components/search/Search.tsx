@@ -5,7 +5,7 @@ import { SearchProps } from "../../types";
 const Search: FunctionComponent<SearchProps> = ({ values, handleChange }): ReactElement => {
   return (
     <section className={styles.searchSpace}>
-      Search Here{" "}
+      Search Here
       <input
         type="search"
         name=""
