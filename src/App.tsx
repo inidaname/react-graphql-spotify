@@ -1,18 +1,21 @@
 import React, {
   FunctionComponent,
   ReactElement,
+  useContext,
   useEffect,
   useState,
 } from "react";
-import { Button, Footer, Header, Result, Search } from "./components";
+import { Footer, Header, Result, Search } from "./components";
 import { useArtistLazyQuery } from "./generated/graphql";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { container } from "./styles/App.module.css";
+import AppContext from './context'
+import { ContextState } from "./types/context";
 
 const App: FunctionComponent = (): ReactElement => {
   // set values for search input
   const [values, setValues] = useState<string>("");
-  const [poplate, setPoplate] = useState<string>("");
+  const [state, setState] = useState<boolean>(false)
 
   // const [getArtists, { data, error }] = useLazyQuery(QUERY_ARTISTS);
 
@@ -21,6 +24,11 @@ const App: FunctionComponent = (): ReactElement => {
   const updateQuery = () => {
     getArtists({ variables: { byName: values } });
   };
+
+  useEffect(() => {
+    setState(() => loading)
+    return () => {}
+  }, [loading])
 
   // function getSearch() {
   //   setPoplate(values);
@@ -31,7 +39,7 @@ const App: FunctionComponent = (): ReactElement => {
   // if (error) return <>Error! ${error.message}</>;
 
   return (
-    <>
+    <AppContext.Provider value={{state, setState}}>
       <HelmetProvider>
         <Helmet>
           <title>Music Graphql Search</title>
@@ -44,13 +52,12 @@ const App: FunctionComponent = (): ReactElement => {
         </Helmet>
         <Header />
         <main className={container}>
-          <Search values={values} handleChange={setValues} />
-          <Button status={loading} handleClick={updateQuery} />
+          <Search values={values} handleChange={setValues} handleClick={updateQuery} />
           {data && <Result data={data} />}
         </main>
         <Footer />
       </HelmetProvider>
-    </>
+    </AppContext.Provider>
   );
 };
 

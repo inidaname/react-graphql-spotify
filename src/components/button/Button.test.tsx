@@ -1,20 +1,25 @@
+import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
-import { act, render, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import mocks from "../../tests/mock/result";
 import userEvent from "@testing-library/user-event";
-import App from "../../App";
+import AppContext from "../../context";
+import { Button } from "..";
+import { ContextState } from "../../types";
 
-describe('Button component', () => {
+describe("Button component", () => {
+  const myMock = jest.fn();
+  let rendered: RenderResult;
 
-  let rendered: RenderResult
-  beforeEach( async() => {
+  beforeEach(async () => {
+    
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
-            <App />
+          <Button handleClick={myMock} />
         </MockedProvider>
-      )
-    })
+      );
+    });
   });
 
   it("should click to search value", async () => {
@@ -23,9 +28,12 @@ describe('Button component', () => {
     }) as HTMLButtonElement;
 
     await act(async () => {
-      userEvent.click(button)
-    })
-    expect(button.disabled).toBeTruthy()
+      userEvent.click(button);
+    });
+    await act(
+      async () => await new Promise((resole) => setTimeout(resole, 1000))
+    );
+    
+    expect(myMock).toBeCalledTimes(1);
   });
-
 });

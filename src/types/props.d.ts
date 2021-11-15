@@ -3,6 +3,7 @@ import { Album, ArtistQuery } from "../generated/graphql";
 export interface SearchProps {
   values: string;
   handleChange: (value: string) => void;
+  handleClick: () => void;
 }
 
 export interface ResultProps {
@@ -10,6 +11,5 @@ export interface ResultProps {
 }
 
 export interface ButtonProps {
-  status: boolean;
   handleClick: () => void
 }
