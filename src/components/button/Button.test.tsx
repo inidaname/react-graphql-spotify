@@ -16,7 +16,7 @@ describe("Button component", () => {
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Button handleClick={myMock} />
+          <Button handleSubmit={myMock} />
         </MockedProvider>
       );
     });
@@ -24,7 +24,7 @@ describe("Button component", () => {
 
   it("should click to search value", async () => {
     const button: HTMLButtonElement = rendered.getByRole("button", {
-      name: "Search",
+      name: "Start Search",
     }) as HTMLButtonElement;
 
     await act(async () => {

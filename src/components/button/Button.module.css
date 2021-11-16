@@ -16,13 +16,13 @@
 .button:hover:not(:disabled){
   background-color: #2fb5fe;
   background-image: linear-gradient(180deg, #2fb5fe 0%, #28a0ef 100%);
-  box-shadow: 0 3px 5px #0000002e;
+  box-shadow: 0.01rem 0.2rem 0.4rem #0000002e;
 }
 
 .button:active {
   background-color: #2fb5fe;
   background-image: linear-gradient(180deg, #2fb5fe 0%, #28a0ef 100%);
-  box-shadow: 0 3px 5px #0000002e;
+  box-shadow: 0.01rem 0.2rem 0.4rem #0000002e;
   transform: translateY(4px);
 }
 

@@ -3,10 +3,10 @@ import styles from "./Search.module.css";
 import { SearchProps } from "../../types";
 import { Button } from "..";
 
-const Search: FunctionComponent<SearchProps> = ({ values, handleChange, handleClick }): ReactElement => {
+const Search: FunctionComponent<SearchProps> = ({ values, handleChange, handleSubmit }): ReactElement => {
   
   return (
-    <section className={styles.searchSpace}>
+    <form  className={styles.searchSpace}>
       <label htmlFor="search">Search Here</label>
       <input
         type="search"
@@ -17,8 +17,8 @@ const Search: FunctionComponent<SearchProps> = ({ values, handleChange, handleCl
         aria-label="Search by artist name"
         placeholder="Search by artist name"
       />
-      <Button handleClick={handleClick} />
-    </section>
+      <Button handleSubmit={handleSubmit} />
+    </form>
   );
 };
 

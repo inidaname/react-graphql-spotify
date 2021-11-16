@@ -40,7 +40,7 @@ describe("App component", () => {
   });
 
   it("should render button component", () => {
-    const button = rendered.getByRole("button", { name: "Search" });
+    const button = rendered.getByRole("button", { name: "Start Search" });
     expect(button).toBeInTheDocument();
   });
 
