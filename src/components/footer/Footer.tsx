@@ -1,14 +1,10 @@
 import React, { FunctionComponent, ReactElement } from 'react'
 import styles from './Footer.module.css';
 
-interface Props {
-  
-}
-
-const Footer: FunctionComponent = (props: Props): ReactElement => {
+const Footer: FunctionComponent = (): ReactElement => {
   return (
     <footer className={styles.footer}>
-
+      Built With React and Typescript
     </footer>
   )
 }

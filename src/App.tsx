@@ -8,15 +8,13 @@ import { Footer, Header, Result, Search } from "./components";
 import { useArtistLazyQuery } from "./generated/graphql";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { container, header } from "./styles/App.module.css";
-import AppContext from "./context";
+import ButtonContext from "./context";
 
 const App: FunctionComponent = (): ReactElement => {
   // set values for search input
   const [values, setValues] = useState<string>("");
   const [state, setState] = useState<boolean>(false);
-
-  // const [getArtists, { data, error }] = useLazyQuery(QUERY_ARTISTS);
-
+  
   const [getArtists, { data, loading, error }] = useArtistLazyQuery();
 
   const updateQuery = () => {
@@ -29,7 +27,7 @@ const App: FunctionComponent = (): ReactElement => {
   }, [loading]);
 
   return (
-    <AppContext.Provider value={{ state, setState }}>
+    <ButtonContext.Provider value={{ state, setState }}>
       <HelmetProvider>
         <Helmet>
           <title>Music Graphql Search</title>
@@ -55,7 +53,7 @@ const App: FunctionComponent = (): ReactElement => {
         </main>
         <Footer />
       </HelmetProvider>
-    </AppContext.Provider>
+    </ButtonContext.Provider>
   );
 };
 
