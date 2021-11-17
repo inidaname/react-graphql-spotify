@@ -1,4 +1,4 @@
-import { Album, ArtistQuery } from "../generated/graphql";
+import { ArtistQuery } from "../generated/graphql";
 
 export interface SearchProps {
   values: string;
