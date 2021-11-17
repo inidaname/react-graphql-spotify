@@ -8,8 +8,9 @@ import { Result } from "../components";
 
 describe("App component", () => {
   let rendered: RenderResult;
-
+  
   beforeEach(async () => {
+    window.scroll = jest.fn()
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
@@ -26,6 +27,10 @@ describe("App component", () => {
       };
     });
   });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  })
 
   it("should render Header with title", () => {
     const titleName = rendered.getByRole("heading");

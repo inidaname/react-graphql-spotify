@@ -11,6 +11,7 @@ describe("Result component", () => {
   let clickedElement: Album[];
   let actualResult: NodeListOf<Element>;
   beforeEach(async () => {
+    window.scroll = jest.fn()
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
@@ -26,6 +27,10 @@ describe("Result component", () => {
       userEvent.click(element);
       clickedElement = mocks[0].data.queryArtists[i].albums;
     });
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
   });
 
   it("should render children with value of result", () => {

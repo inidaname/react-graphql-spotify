@@ -10,7 +10,7 @@ describe("Button component", () => {
   let rendered: RenderResult;
 
   beforeEach(async () => {
-    
+    window.scroll = jest.fn()    
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
@@ -18,6 +18,10 @@ describe("Button component", () => {
         </MockedProvider>
       );
     });
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
   });
 
   it("should click to search value", async () => {

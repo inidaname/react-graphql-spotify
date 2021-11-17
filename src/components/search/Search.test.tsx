@@ -8,6 +8,7 @@ describe("Search component", () => {
   let rendered: RenderResult;
   let value: string = "Eminem";
   beforeEach(async () => {
+    window.scroll = jest.fn()
     const mockCallBack = jest.fn();
     await act(async () => {
       rendered = render(
@@ -16,6 +17,10 @@ describe("Search component", () => {
         </MockedProvider>
       );
     });
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
   });
 
 
