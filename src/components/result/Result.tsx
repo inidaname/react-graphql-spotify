@@ -1,11 +1,10 @@
 import React, { FunctionComponent, ReactElement, useState } from "react";
-import { Album, Track } from "../../generated/graphql";
-import { ResultProps } from "../../types";
+import { Album } from "../../generated/graphql";
+import { ResultProps, AlbumState } from "../../types";
 import styles from "./Result.module.css";
 
 const Result: FunctionComponent<ResultProps> = ({ data }): ReactElement => {
-  const [album, setAlbum] = useState<{albums: Album[]; artist: string}>({albums: [], artist: ''});
-  const [tracks, setTracks] = useState<Track[]>([]);
+  const [album, setAlbum] = useState<AlbumState>({albums: [], artist: ''});
   const [style, setStyle] = useState<number>();
 
   return (
@@ -38,9 +37,6 @@ const Result: FunctionComponent<ResultProps> = ({ data }): ReactElement => {
                 <div
                   key={`${i}-${alb.id}`}
                   className={styles.subResult}
-                  onClick={() => {
-                    setTracks(alb.tracks as Track[]);
-                  }}
                 >
                   <img src={alb.image!} alt={alb.name!} />
                   <p>
@@ -52,7 +48,6 @@ const Result: FunctionComponent<ResultProps> = ({ data }): ReactElement => {
               ))}
           </section>
         </div>
-        {album && tracks && tracks.map((track) => <div>{track.name}</div>)}
       </section>
     </section>
   );

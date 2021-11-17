@@ -23,7 +23,7 @@
   transition: box-shadow 300ms;
   display: block;
   line-height: 0.8rem;
-  color: #455A64;
+  color: #455a64;
   font-size: 16px;
   height: 38px;
   width: 45%;
@@ -32,10 +32,23 @@
 }
 
 .searchSpace input::placeholder {
-  color: #B0BEC5;
+  color: #b0bec5;
 }
 
 .searchSpace input:focus {
   outline: none;
-  box-shadow: 0.1rem 0.6rem 1.0rem #02273d7e;
+  box-shadow: 0.1rem 0.6rem 1rem #02273d7e;
+}
+
+@media screen and (max-width:  480px) {
+  .searchSpace {
+    flex-direction: column;
+    min-height: 180px;
+    justify-content: space-around;
+  }
+
+  .searchSpace input {
+    width: 80%;
+    height: 55px;
+  }
 }

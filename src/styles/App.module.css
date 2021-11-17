@@ -17,3 +17,12 @@
   box-shadow: 0.01rem 0.02rem 0.4rem #5e60617e;
   top: 0;
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    min-height: 220px;
+  }
+  .container {
+    margin-top: 260px;
+  }
+}
