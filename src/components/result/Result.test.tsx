@@ -1,11 +1,10 @@
+import React from 'react';
 import { MockedProvider } from "@apollo/client/testing";
-import { act, render, RenderResult, waitFor } from "@testing-library/react";
+import { act, render, RenderResult } from "@testing-library/react";
 import mocks from "../../tests/mock/result";
 import userEvent from "@testing-library/user-event";
-import App from "../../App";
 import { Result } from "..";
 import { Album } from "../../generated/graphql";
-import waitForExpect from "wait-for-expect";
 
 describe("Result component", () => {
   let rendered: RenderResult;

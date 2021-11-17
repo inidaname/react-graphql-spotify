@@ -1,11 +1,9 @@
 import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
-import { act, fireEvent, render, RenderResult } from "@testing-library/react";
+import { act, render, RenderResult } from "@testing-library/react";
 import mocks from "../../tests/mock/result";
 import userEvent from "@testing-library/user-event";
-import AppContext from "../../context";
 import { Button } from "..";
-import { ContextState } from "../../types";
 
 describe("Button component", () => {
   const myMock = jest.fn();

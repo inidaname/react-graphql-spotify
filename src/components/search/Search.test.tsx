@@ -2,7 +2,6 @@ import React from "react";
 import { render, fireEvent, act, RenderResult } from "@testing-library/react";
 import { Search } from "..";
 import { MockedProvider } from "@apollo/client/testing";
-import App from "../../App";
 import mocks from "../../tests/mock/result";
 
 describe("Search component", () => {
@@ -13,7 +12,7 @@ describe("Search component", () => {
     await act(async () => {
       rendered = render(
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Search handleClick={mockCallBack} values={value} handleChange={mockCallBack} />
+          <Search handleSubmit={mockCallBack} values={value} handleChange={mockCallBack} />
         </MockedProvider>
       );
     });
