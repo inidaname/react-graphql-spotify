@@ -1,4 +1,4 @@
-# Music Search app on React Typescrit and Graphql
+# Music Search app on React Typescript and Graphql
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
