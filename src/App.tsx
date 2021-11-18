@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
+import { Footer, Header, Result, Search } from "./components";
+import { useArtistLazyQuery } from "./generated/graphql";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { container, header } from "./styles/App.module.css";
+import ButtonContext from "./context";
 
-function App() {
+const App: FunctionComponent = (): ReactElement => {
+  // set values for search input
+  const [values, setValues] = useState<string>("");
+  const [state, setState] = useState<boolean>(false);
+  
+  const [getArtists, { data, loading, error }] = useArtistLazyQuery();
+
+  const updateQuery = () => {
+    getArtists({ variables: { byName: values } });
+  };
+
+  useEffect(() => {
+    setState(() => loading);
+    return () => {};
+  }, [loading]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ButtonContext.Provider value={{ state, setState }}>
+      <HelmetProvider>
+        <Helmet>
+          <title>Music Graphql Search</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+        <main className={container}>
+          <div className={header}>
+            <Header />
+            <Search
+              values={values}
+              handleChange={setValues}
+              handleSubmit={updateQuery}
+            />
+          </div>
+          {loading && <div><h3>Loading Search Result</h3></div>}
+          {error && <div>{error}</div>}
+          {data && <Result data={data} />}
+        </main>
+        <Footer />
+      </HelmetProvider>
+    </ButtonContext.Provider>
   );
-}
+};
 
 export default App;
